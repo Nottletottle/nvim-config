@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Check if stow is installed
+if ! command -v stow &> /dev/null; then
+    echo "Error: stow is not installed. Please install it and try again."
+    exit 1
+fi
+
+# Stow the nvim configuration to ~/.config/nvim
+stow nvim --target="$HOME/.config/nvim"
+
+echo "Neovim configuration has been successfully linked to ~/.config/nvim!"
+
