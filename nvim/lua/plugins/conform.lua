@@ -10,6 +10,11 @@ return {
 				rust = { "rustfmt", lsp_format = "fallback" },
 				-- Conform will run the first available formatter
 				javascript = { "prettierd", "prettier", stop_after_first = true },
+				javascriptreact = { "prettier", "prettierd" },
+				json = { "prettierd", "prettier" },
+				markdown = { "prettier", "prettier" },
+				html = { "prettier", "prettier" },
+				css = { "prettier", "prettier" },
 			},
 		})
 	end,

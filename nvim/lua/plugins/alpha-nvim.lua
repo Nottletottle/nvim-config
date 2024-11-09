@@ -41,11 +41,9 @@ return {
 				dashboard.button("e", "󰈔  New file", ":ene <BAR> startinsert <CR>"),
 				dashboard.button("f", "󰈞  Find file", ":Telescope find_files<CR>"),
 				dashboard.button("r", "  Recent", ":Telescope oldfiles<CR>"),
-				dashboard.button(
-					"c",
-					"  Configs",
-					":lua require('telescope.builtin').find_files({ cwd = vim.fn.stdpath('config') })<CR>"
-				),
+				dashboard.button("c", "  Configs", function()
+					vim.cmd("Telescope find_files cwd=" .. vim.fn.stdpath("config"))
+				end),
 				dashboard.button("q", "🗙  Quit", ":qa<CR>"),
 			}
 

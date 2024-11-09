@@ -8,6 +8,11 @@ return {
 	},
 	{
 		"hrsh7th/nvim-cmp",
+		dependencies = {
+			"hrsh7th/cmp-nvim-lsp", -- Add LSP source
+			"hrsh7th/cmp-path", -- Add path source
+			"hrsh7th/cmp-buffer", -- Add buffer source
+		},
 		config = function()
 			local cmp = require("cmp")
 			require("luasnip.loaders.from_vscode").lazy_load()
@@ -27,6 +32,10 @@ return {
 			vim.api.nvim_set_hl(0, "CmpFloatBorder", { fg = "#b679d8" })
 			vim.api.nvim_set_hl(0, "CmpItemSelected", { bg = "#2e4149" })
 			vim.api.nvim_set_hl(0, "CmpPmenu", { bg = "NONE", blend = 10 })
+
+			-- Updated capabilities for HTML/JSX support
+			local capabilities = vim.lsp.protocol.make_client_capabilities()
+			capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 			cmp.setup({
 				snippet = {
@@ -87,6 +96,8 @@ return {
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
 					{ name = "luasnip" },
+					{ name = "path" }, -- Add path source for imports
+					{ name = "emmet_ls" }, -- Add Emmet source
 				}, {
 					{ name = "buffer" },
 				}),
@@ -97,10 +108,29 @@ return {
 							nvim_lsp = "[LSP]",
 							luasnip = "[Snippet]",
 							buffer = "[Buffer]",
+							path = "[Path]",
+							emmet_ls = "[Emmet]",
 						})[entry.source.name]
 						return vim_item
 					end,
 				},
+			})
+
+			-- Set up file type specific completions
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+				callback = function()
+					cmp.setup.buffer({
+						sources = cmp.config.sources({
+							{ name = "nvim_lsp" },
+							{ name = "luasnip" },
+							{ name = "path" },
+							{ name = "emmet_ls" },
+						}, {
+							{ name = "buffer" },
+						}),
+					})
+				end,
 			})
 		end,
 	},
@@ -108,7 +138,5 @@ return {
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
 		config = true,
-		-- use opts = {} for passing setup options
-		-- this is equivalent to setup({}) function
 	},
 }
