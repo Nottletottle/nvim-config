@@ -29,11 +29,9 @@ vim.opt.hlsearch = false -- do not highlight matches
 vim.opt.ignorecase = true -- ignore case in searches by default
 vim.opt.smartcase = true -- but make it case sensitive if an uppercase is entered
 vim.opt.numberwidth = 2 -- Set number column width
-vim.opt.signcolumn = "yes:2" -- Make sign column 2 characters wide
-vim.opt.statuscolumn = "%=%l%=" -- This adds a space after the line number
+vim.opt.signcolumn = "yes:1" -- Make sign column 2 characters wide
 
 vim.opt.clipboard:remove("unnamedplus")
-
 -- Key mappings
 vim.keymap.set({ "n", "v" }, "yk", '"+y', { desc = "Yank to system clipboard" })
 vim.keymap.set("n", "ykk", '"+yy', { desc = "Yank line to system clipboard" })
