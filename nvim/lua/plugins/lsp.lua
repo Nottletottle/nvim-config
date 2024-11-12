@@ -68,7 +68,7 @@ return {
 			-- HTML
 			lspconfig.html.setup({
 				capabilities = capabilities,
-				filetypes = { "html", "javascriptreact", "typescriptreact" },
+				filetypes = { "html" },
 			})
 
 			-- Emmet
@@ -76,14 +76,19 @@ return {
 				capabilities = capabilities,
 				filetypes = {
 					"html",
-					"typescriptreact",
-					"javascriptreact",
 					"css",
 					"sass",
 					"scss",
 					"less",
+				},
+			})
+			lspconfig.ts_ls.setup({
+				capabilities = capabilities,
+				filetypes = {
 					"javascript",
+					"javascriptreact",
 					"typescript",
+					"typescriptreact",
 				},
 			})
 			-- Keybindings for LSP functionality
