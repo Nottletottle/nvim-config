@@ -38,7 +38,26 @@ return {
 					},
 				},
 			},
+			event_handlers = {
+				{
+					event = "neo_tree_buffer_enter",
+					handler = function()
+						require("neo-tree.sources.git_status").refresh()
+					end,
+				},
+			},
 		})
 		vim.keymap.set("n", "<leader>e", ":Neotree toggle<CR>")
+		-- Add the autocmd for refresh on focus
+		vim.api.nvim_create_autocmd({ "FocusGained" }, {
+			callback = function()
+				local last_buf = vim.fn.bufname("#")
+				if last_buf and last_buf:match("lazygit") then
+					-- Refresh both filesystem and git status
+					require("neo-tree.sources.git_status").refresh()
+					require("neo-tree.sources.manager").refresh("filesystem")
+				end
+			end,
+		})
 	end,
 }
