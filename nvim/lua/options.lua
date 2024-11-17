@@ -12,7 +12,7 @@ vim.opt.foldlevelstart = 4
 vim.opt.number = true -- show absolute number
 vim.opt.relativenumber = true -- add numbers to each line on the left side
 vim.opt.cursorline = true -- highlight cursor line underneath the cursor horizontally
-vim.opt.scrolloff = 19 -- always keep cursor in the middle
+vim.opt.scrolloff = math.floor(vim.o.lines / 2) -- always keep cursor in the middle
 vim.cmd([[
   highlight TelescopeNormal guibg=NONE ctermbg=NONE
   highlight TelescopePrompt guibg=NONE ctermbg=NONE
