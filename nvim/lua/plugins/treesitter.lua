@@ -9,5 +9,10 @@ return {
 			highlight = { enable = true },
 			indent = { enable = true },
 		})
+		vim.filetype.add({
+			extension = {
+				["j2"] = "htmldjango",
+			},
+		})
 	end,
 }
