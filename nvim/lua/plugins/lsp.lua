@@ -91,6 +91,19 @@ return {
 					"typescriptreact",
 				},
 			})
+			lspconfig.pylsp.setup({
+				settings = {
+					pylsp = {
+						plugins = {
+							pycodestyle = {
+								ignore = { "W391" },
+								maxLineLength = 100,
+							},
+						},
+					},
+				},
+			})
+
 			-- Keybindings for LSP functionality
 			-- These work in normal mode when an LSP server is attached
 			vim.keymap.set("n", "K", function()
